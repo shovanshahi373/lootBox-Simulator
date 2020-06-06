@@ -15,3 +15,25 @@
     border-left-width: 100% !important;
   }
 }
+
+@keyframes notificationPopUp {
+  0% {
+    transform: translateY(0px);
+  }
+  1% {
+    transform: translateY(50px);
+  }
+  90% {
+    transform: translateY(50px);
+    /* box-shadow: 300px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset; */
+  }
+  95% {
+    transform: translateY(50px) translateX(-20%);
+  }
+  96% {
+    transform: translateY(50px) translateX(110%);
+  }
+  100% {
+    transform: translateY(50px) translateX(110%);
+  }
+}

@@ -91,6 +91,7 @@ const unlockChest = (e, data) => {
   chestBeingUnlocked = true;
   let isExpired = false;
   let percentage;
+  e.target.style.pointerEvents = "none";
   const id = setInterval(() => {
     const seconds = (timeLimit / 1000 - Math.floor(Date.now() / 1000)).toFixed(
       0
@@ -136,7 +137,11 @@ const pushChestToSlot = (chest) => {
   unlock.textContent = text;
   const toolTip = document.createElement("div");
   toolTip.classList.add("chest-toolTip");
-  toolTip.innerHTML += `<p>unlock time: ${chest.unlockTime} seconds</p>`;
+  toolTip.innerHTML += `<p class="tooltip-p">${chest.name.replace(
+    "-",
+    " "
+  )}</p>`;
+  toolTip.innerHTML += `<p class="tooltip-p">unlock time: ${chest.unlockTime} seconds</p>`;
   toolTip.innerHTML += `contains at least:<br> ${chest.toolTipData}`;
   const context = document.querySelector(`.slot.slot-${chest.slotId}`);
   context.appendChild(img);
@@ -219,26 +224,20 @@ $notifications.addEventListener("pushNotification", (e) => {
     const cross = document.createElement("span");
     cross.classList.add("cross");
     cross.addEventListener("click", () => {
-      div.classList.add("phaseOut");
       setTimeout(() => {
         deleteNotification(mes.id, $notifications, timerToken);
       }, 500);
-      // deleteNotification(mes.id, $notifications);
     });
     cross.textContent = "X";
     div.classList.add("notification");
     div.setAttribute("data-id", mes.id);
+    div.addEventListener("animationend", () => {
+      deleteNotification(mes.id, $notifications, timerToken);
+    });
     const text = mes.message;
     div.innerHTML = text;
     div.appendChild(cross);
     $notifications.appendChild(div);
-    timerToken = setTimeout(() => {
-      document
-        .querySelector(`[data-id="${mes.id}"]`)
-        .querySelector("span.cross")
-        .click();
-      // deleteNotification(mes.id, $notifications);
-    }, 5000);
   }
 });
 
@@ -276,18 +275,9 @@ const getRandomChest = () => {
 
   const [pulledCards, myMessages] = openChest(myPool, notGurarenteedCards);
 
-  const msg = `<span>
-    ${messages}
-    ${myMessages}
-    </span>
-  `;
-  // const length = slots.length;
   const slotId = firstEmptySlot + 1;
 
-  // const $slot = document.querySelector(`.slot.slot-${slotId}`);
-
   const myId = idGenerator();
-  // $slot.setAttribute("data-id", myId);
 
   const gCards = chest.guaranteed.map(
     ({ type, amount }) => `x${amount} ${type}`
@@ -311,12 +301,20 @@ const getRandomChest = () => {
     });
   });
 
+  const mesagePrefix = "you recieved ";
+
+  const msg = myRecievedCards
+    .map(({ type, amount }) => {
+      return `x${amount} ${type} cards`;
+    })
+    .join(",");
+
   const data = {
     name: chest.name,
     id: myId,
     slotId,
     isLocked: true,
-    message: msg,
+    message: mesagePrefix + msg,
     cards: myRecievedCards,
     unlockTime: chest.unlockTime,
     toolTipData: gCards,
@@ -327,13 +325,10 @@ const getRandomChest = () => {
     ...data,
   };
 
-  // chestHolders.set(slotId, slots[firstEmptySlot]);
-  // const newChestHolder = {...chestHolders,}
   chestHolders[slotId] = slots[firstEmptySlot];
   console.log("chestHolders");
   console.log(chestHolders);
 
-  // localStorage.setItem("MYCHESTS", JSON.stringify(slots));
   localStorage.setItem("MYSLOTS", JSON.stringify(chestHolders));
 
   pushChestToSlot(slots[firstEmptySlot]);
@@ -388,7 +383,7 @@ $slotss.forEach((slot) => {
       chestHolders[s.slotId] = { isEmpty: true };
       localStorage.setItem("MYSLOTS", JSON.stringify(chestHolders));
     } else if (s && s.isLocked) {
-      const message = "chest not unlocked yet.";
+      const message = "Click on 'UNLOCK' button to open this chest";
       createNotification(
         message,
         NOTIFICATIONS,

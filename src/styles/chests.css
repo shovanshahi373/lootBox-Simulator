@@ -112,6 +112,12 @@
   display: none;
 }
 
+.tooltip-p {
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+  padding: 2px;
+}
+
 .unlock-chest-btn:hover + .chest-toolTip {
   display: block;
 }

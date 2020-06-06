@@ -133,11 +133,20 @@ body {
   border-bottom-right-radius: 5px;
   cursor: pointer;
   position: relative;
-  animation-name: phaseIn;
+  /* animation-name: phaseIn;
   animation-iteration-count: initial;
   animation-duration: 0.2s;
   animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards; */
+  animation-name: notificationPopUp;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
   animation-fill-mode: forwards;
+}
+
+.notification:hover {
+  animation-play-state: paused;
+  box-shadow: 12px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset;
 }
 
 .timer {
@@ -175,10 +184,9 @@ body {
   color: hsla(290, 100%, 50%, 0.8);
 }
 
-.notification:hover {
-  box-shadow: 12px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset;
-}
+/* .notification:hover {
+} */
 
-.notification.phaseOut {
+/* .notification.phaseOut {
   box-shadow: 300px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset;
-}
+} */
