@@ -92,6 +92,7 @@ const unlockChest = (e, data) => {
   let isExpired = false;
   let percentage;
   e.target.style.pointerEvents = "none";
+  e.target.classList.replace("levitation", "shrinkDown");
   const id = setInterval(() => {
     const seconds = (timeLimit / 1000 - Math.floor(Date.now() / 1000)).toFixed(
       0
@@ -108,7 +109,6 @@ const unlockChest = (e, data) => {
         pushEvent,
         popEvent
       );
-      console.log(data);
       $progressBar.style.width = 0 + "%";
       $TIMER.innerHTML = "no chest being opened...";
       removeChestLock(data);
@@ -129,6 +129,7 @@ const pushChestToSlot = (chest) => {
   img.classList.add("slot-image");
   const unlock = document.createElement("div");
   unlock.classList.add("unlock-chest-btn");
+  unlock.classList.add("levitation");
   unlock.addEventListener("click", (e) =>
     // unlockChest(e, chest.cards, chest.unlockTime)
     unlockChest(e, chest)
@@ -155,11 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let isNull = localStorage.getItem("MYSLOTS") === null;
   if (!isNull) {
     const mySlots = localStorage.getItem("MYSLOTS");
-    console.log("fetched from localStorage");
     chestHolders = JSON.parse(mySlots);
-    console.log("myChestHolders:", chestHolders);
     slots = Object.values(chestHolders);
-    console.log("slots:", slots);
     slots.forEach((slot) => {
       if (!slot.isEmpty) {
         slot.isLocked && pushChestToSlot(slot);
@@ -167,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   } else {
-    console.log("save data not found..");
     const v = {
       1: {
         isEmpty: true,
@@ -183,10 +180,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     };
     const cc = JSON.stringify(v, null, 4);
-    console.log(cc);
     slots = Object.values(v);
     chestHolders = v;
-    console.log("moi slots", slots);
     localStorage.setItem("MYSLOTS", cc);
   }
   //create card collection data
@@ -209,7 +204,6 @@ const openChest = (pool, tries = 5) => {
     const randomNumber = Math.floor(Math.random() * pool.length);
     const pulledCard = pool[randomNumber];
     messages.push(`<p>you pulled a ${pulledCard} card!(${i + 1}/${tries})</p>`);
-    console.log(`you pulled a ${pulledCard} card!(${i + 1}/${tries})`);
     pulledCards.push(pulledCard);
   }
   return [pulledCards, messages];
@@ -242,12 +236,11 @@ $notifications.addEventListener("pushNotification", (e) => {
 });
 
 $notifications.addEventListener("popNotification", (e) => {
-  console.log("after popping", e.detail);
+  // console.log("after popping", e.detail);
 });
 
 const getRandomChest = () => {
   const firstEmptySlot = slots.findIndex((s) => s.isEmpty);
-  console.log("slot is empty at pos ", firstEmptySlot);
   if (firstEmptySlot === -1) {
     const message = "chest slots full!";
     return createNotification(
@@ -269,7 +262,6 @@ const getRandomChest = () => {
     return ttl + obj.amount;
   }, 0);
 
-  console.log(`congrats! you recieved a ${chest.name}`);
   const notGurarenteedCards = chest.numberOfCards - totalGuaranteedCards;
   const myPool = cardPool(chest);
 
@@ -326,9 +318,8 @@ const getRandomChest = () => {
   };
 
   chestHolders[slotId] = slots[firstEmptySlot];
-  console.log("chestHolders");
-  console.log(chestHolders);
 
+  // localStorage.setItem("MYCHESTS", JSON.stringify(slots));
   localStorage.setItem("MYSLOTS", JSON.stringify(chestHolders));
 
   pushChestToSlot(slots[firstEmptySlot]);
@@ -373,7 +364,6 @@ $slotss.forEach((slot) => {
       insertCardsToCollection(s.cards);
       const element = document.querySelector(`[data-id="${id}"]`);
       do {
-        console.log(element.firstChild);
         element.removeChild(element.firstChild);
         element.style = "";
       } while (element.childNodes.length);
