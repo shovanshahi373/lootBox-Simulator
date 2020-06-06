@@ -1,0 +1,17 @@
+@keyframes levitate {
+  to {
+    transform: translateY(10%);
+  }
+}
+
+@keyframes phaseIn {
+  to {
+    transform: translateY(50px);
+  }
+}
+
+@keyframes phaseOut {
+  to {
+    border-left-width: 100% !important;
+  }
+}

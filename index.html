@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loot Box Simulator</title>
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+          <!-- <div class="collection">
+            <span>Commons: <span class="common"></span></span>
+            <span>Rares: <span class="rare"></span></span>
+            <span>Epics:<span class="epic"></span></span>
+            <span>Legendaries: <span class="legendary"></span></span>
+          </div> -->
+        </nav>
+      </header>
+      <main>
+        <div class="top-container">
+          <button class="btn req-chest-btn">request a chest</button>
+
+          <div class="collection">            
+            <span>Commons: <span class="common">0</span></span>
+            <span>Rares: <span class="rare">0</span></span>
+            <span>Epics:<span class="epic">0</span></span>
+            <span>Legendaries: <span class="legendary">0</span></span>
+          </div>
+        </div>
+        <!-- <button class="btn req-chest-btn">request a chest</button> -->
+        <div class="notification-container">
+
+        </div>
+
+        <span class="timer">
+          no chest being opened...
+        </span>
+
+        <div class="timer-progress" style="width:0%;"></div>
+        
+        <section class="chest-slots">
+          <div class="slot slot-1">
+          </div>
+          <div class="slot slot-2"></div>
+          <div class="slot slot-3"></div>
+          <div class="slot slot-4"></div>
+        </section>
+
+        <div class="msg"></div>
+      </main>
+    </button>
+    <script src="./main.js" type="module"></script>
+  </body>
+</html>
