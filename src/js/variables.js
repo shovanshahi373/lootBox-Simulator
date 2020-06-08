@@ -162,3 +162,20 @@ export const chest = {
     unlockTime: 10,
   },
 };
+
+export const AboutQuestions = [
+  {
+    question: "what is this?",
+    answer:
+      "<p>You might have played card collection based games where you have to collect cards(game items) in order to reinforce your game playing experience and overall strength. Such cards are obtainable via lootBoxes. This application merely mimics that lootBox system.</p>",
+  },
+  {
+    question: "How do i proceed?",
+    answer: `
+    <p>- Click on 'REQUEST A CHEST' button on top left corner.(This will fill a slot in the bottom section with a chest).</p>
+    <p>- Click on 'UNLOCK' button of the chest you want to open.</p>
+    <p>- After the chest is unlocked, click on the chest itself to open it up.</p>
+    <p>- collect the cards.</p>
+    `,
+  },
+];

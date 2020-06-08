@@ -1,4 +1,6 @@
 @import "./chests.css";
+@import "./notifications.css";
+@import "./card.css";
 @font-face {
   font-family: "Sigmar One", cursive;
   src: url("https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap");
@@ -9,8 +11,9 @@
 *::after {
   margin: 0;
   padding: 0;
+  /* text-align: center; */
   box-sizing: border-box;
-  font-family: "Sigmar One", cursive;
+  font-family: "Sigmar One", sans-serif;
 }
 
 :root {
@@ -18,13 +21,12 @@
   --gold: gold;
 }
 
-li {
+ul li {
   list-style: none;
 }
 
 body {
   height: 100vh;
-  /* width: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +36,6 @@ body {
     hsl(240, 100%, 80%),
     hsl(220, 99%, 60%)
   );
-  /* font-family: custom; */
 }
 
 .container {
@@ -58,13 +59,18 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
+  font-variant-numeric: tabular-nums;
   border-radius: 5px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
+  background-color: gold;
   color: hsla(290, 100%, 50%, 0.8);
 }
 .collection > * {
   margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .btn {
@@ -81,9 +87,9 @@ body {
 
 .req-chest-btn {
   position: relative;
-  /* font-size: 1.5rem; */
   background-color: gold;
   color: white;
+  cursor: pointer;
   overflow: hidden;
   transition: all 0.2s;
   box-shadow: 0px 8px 0 5px hsl(54, 78%, 42%);
@@ -107,51 +113,6 @@ body {
   width: 10%;
 }
 
-.notification-container {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  z-index: 9999;
-}
-
-.notification {
-  padding: 5px 10px;
-  background-color: gold;
-  color: white;
-  height: max-content;
-  /* top: -50%; */
-  transform: translateY(-100%);
-  transition: all 0.2s;
-  margin-bottom: 10px;
-  display: flex;
-  width: max-content;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 8px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset;
-  text-align: center;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-  cursor: pointer;
-  position: relative;
-  /* animation-name: phaseIn;
-  animation-iteration-count: initial;
-  animation-duration: 0.2s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards; */
-  animation-name: notificationPopUp;
-  animation-duration: 6s;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
-}
-
-.notification:hover {
-  animation-play-state: paused;
-  box-shadow: 12px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset;
-}
-
 .timer {
   position: fixed;
   bottom: 0%;
@@ -173,23 +134,62 @@ body {
   background-color: var(--purple);
 }
 
-.cross {
-  height: 100%;
-  width: 10%;
-  content: "X";
-  color: white;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: bolder;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999999999999;
+  height: 100vh;
+  width: 100vw;
+  /* display: flex; */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.cross:hover {
-  color: hsla(290, 100%, 50%, 0.8);
+.toggle-about-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: rgb(182, 31, 82);
+  border: 5px solid rgb(236, 50, 113);
+  color: rgb(202, 123, 94);
+  display: flex;
+  box-shadow: 0 0 3px 0px black;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
 }
 
-/* .notification:hover {
-} */
+.overlay.showAbout {
+  display: flex;
+}
 
-/* .notification.phaseOut {
-  box-shadow: 300px 0px 0px 0px hsla(290, 100%, 50%, 0.8) inset;
-} */
+.about * {
+  pointer-events: none;
+}
+
+.overlay > * {
+  border-radius: 4px;
+  background-color: #fff;
+  padding: 20px;
+  max-width: 80%;
+  max-height: 90%;
+  /* overflow-x: auto; */
+  overflow-y: scroll;
+}
+
+.overlay table {
+  overflow-x: auto;
+}
+
+.overlay .question {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+  text-align: left;
+}
+
+.gray-text {
+  color: #ccc;
+}

@@ -8,31 +8,176 @@
   </head>
   <body>
     <div class="container">
-      <header>
-        <nav>
-          <!-- <div class="collection">
-            <span>Commons: <span class="common"></span></span>
-            <span>Rares: <span class="rare"></span></span>
-            <span>Epics:<span class="epic"></span></span>
-            <span>Legendaries: <span class="legendary"></span></span>
-          </div> -->
-        </nav>
-      </header>
       <main>
         <div class="top-container">
           <button class="btn req-chest-btn">request a chest</button>
+          <button class="btn toggle-about-btn">?</button>
+          <div class="collection">
 
-          <div class="collection">            
-            <span>Commons: <span class="common">0</span></span>
-            <span>Rares: <span class="rare">0</span></span>
-            <span>Epics:<span class="epic">0</span></span>
-            <span>Legendaries: <span class="legendary">0</span></span>
+            <div>
+              <div class="card-container">
+                <div class="card common"></div>
+              </div>
+              <div>Commons: <span class="common">0</span></div>
+            </div>
+
+            <div>
+              <div class="card-container">
+                <div class="card rare"></div>
+              </div>
+              <div>Rares: <span class="rare">0</span></div>
+            </div>
+            <div>
+              <div class="card-container">
+                <div class="card epic"></div>
+              </div>
+              <div>Epics: <span class="epic">0</span></div>
+            </div>
+            <div>
+              <div class="card-container">
+                <div class="card legend"></div>
+              </div>
+              <div>Legendaries: <span class="legendary">0</span></div>
+            </div>
+
           </div>
         </div>
-        <!-- <button class="btn req-chest-btn">request a chest</button> -->
+
         <div class="notification-container">
 
         </div>
+
+
+        <section class="overlay">
+          <div class="about">
+            <div class="question">
+              <h1>what is this?</h1>
+              <p>
+                You might have played card collection based games 
+                where you have to collect cards(game items) in order to reinforce your game playing experience and overall strength. Such cards are obtainable via lootBoxes. This application merely mimics that lootBox system. 
+              </p>
+            </div>
+            <div class="question">
+              <h1>How do i proceed?</h1>
+              <ul>
+                <li> - Click on 'REQUEST A CHEST' button on top left corner.(This will fill a slot in the bottom section with a chest).
+                </li>
+                <li> - Click on 'UNLOCK' button of the chest you want to open.</li>
+                <li>After the chest is unlocked, click on the chest itself to open it up.</li>
+                <li> - collect the cards.</li>
+              </ul>
+            </div>
+            <div class="question">
+              <p>This app is based on probability and random numbers. There are 6 types of chests and their unique drop rate, each chest containing a range of cards and their unique drop rates:</p>
+              <table border="3px">
+                <thead>
+                  <tr>
+                    <th rowspan="2">
+                      Chest
+                    </th>
+                    <th rowspan="2">Drop Rate</th>
+                    <th colspan="4">cards</th>
+                    <th rowspan="2">Total</th>
+                  </tr>
+                  <tr>
+                    <th>commons</th>
+                    <th>rares</th>
+                    <th>epics</th>
+                    <th>legendaries</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Wooden Chest
+                    </td>
+                    <td>
+                      10%
+                    </td>
+                    <td>
+                      at least 4
+                    </td>
+                    <td>
+                      20% chance
+                    </td>
+                    <td>
+                      1.1% chance
+                    </td>
+                    <td>
+                      0.9% chance
+                    </td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Bronze Chest
+                    </td>
+                    <td>
+                      40%
+                    </td>
+                    <td>at least 15</td>
+                    <td>at least 4</td>
+                    <td>1.1% chance</td>
+                    <td>1%</td>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Silver Chest
+                    </td>
+                    <td>
+                      40%
+                    </td>
+                    <td>at least 22</td>
+                    <td>at least 15</td>
+                    <td>at least 2</td>
+                    <td>1.5% chance</td>
+                    <td>40</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Platinum Chest
+                    </td>
+                    <td>
+                      5%
+                    </td>
+                    <td>at least 45</td>
+                    <td>at least 25</td>
+                    <td>at least 8</td>
+                    <td>8% chance</td>
+                    <td>80</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Life Chest
+                    </td>
+                    <td>
+                      3.5%
+                    </td>
+                    <td>at least 65</td>
+                    <td>at least 30</td>
+                    <td>at least 12</td>
+                    <td>at least 1</td>
+                    <td>120</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      Lengendary Chest
+                    </td>
+                    <td>
+                      1.5%
+                    </td>
+                    <td>at least 120</td>
+                    <td>at least 70</td>
+                    <td>at least 30</td>
+                    <td>at least 10</td>
+                    <td>250</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
 
         <span class="timer">
           no chest being opened...

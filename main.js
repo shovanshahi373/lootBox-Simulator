@@ -23,6 +23,18 @@ const $notifications = document.querySelector(".notification-container");
 const $COLLECTION = document.querySelector(".collection");
 const $TIMER = document.querySelector(".timer");
 const $progressBar = document.querySelector(".timer-progress");
+const $overlay = document.querySelector(".overlay");
+const $toggleAboutBtn = document.querySelector(".toggle-about-btn");
+
+$toggleAboutBtn.addEventListener("click", () => {
+  $overlay.classList.add("showAbout");
+});
+$overlay.addEventListener("click", (e) => {
+  console.log(e.target.classList);
+
+  if (!e.target.classList.contains("about"))
+    $overlay.classList.remove("showAbout");
+});
 
 //inits
 let slots = [];

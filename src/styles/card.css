@@ -1,0 +1,81 @@
+.card-container {
+  transform: rotate(-15deg);
+}
+
+.card {
+  --border-radius: 3px;
+  --border-color: rgba(0, 0, 0, 0.3);
+  height: 30px;
+  position: relative;
+  width: 20px;
+  /* overflow: hidden; */
+  transform-origin: bottom left;
+  transform: rotate(0deg);
+  /* z-index: -98; */
+  border: 1px solid var(--border-color);
+  /* border: 1px solid black; */
+  /* border: 1px solid red; */
+  margin: 4px 10px 0px;
+  border-radius: var(--border-radius);
+  --orange: hsl(11, 100%, 55%);
+  --light-blue: hsl(200, 100%, 70%);
+  --purple: hsl(300, 100%, 40%);
+  --rainbow: hsl(0, 100%, 50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%),
+    hsl(180, 100%, 50%), hsl(240, 100%, 70%), hsl(300, 100%, 50%);
+  --border-radius: 3px;
+}
+
+.card::before {
+  position: absolute;
+  border: 1px solid var(--border-color);
+  /* border: 1px solid black; */
+  content: "";
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  transform-origin: bottom left;
+  transform: rotate(10deg);
+  width: 100%;
+  z-index: -11;
+  border-radius: var(--border-radius);
+}
+
+.card::after {
+  position: absolute;
+  border: 1px solid var(--border-color);
+  content: "";
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  transform-origin: bottom left;
+  transform: rotate(25deg);
+  width: 100%;
+  z-index: 99;
+  border-radius: var(--border-radius);
+}
+
+.card.rare,
+.card.rare::before,
+.card.rare::after {
+  background-color: var(--orange);
+  /* box-shadow: -1px 1px 1px 0px hsl(11,100%,35%); */
+}
+
+.card.common,
+.card.common::before,
+.card.common::after {
+  background-color: var(--light-blue);
+  /* box-shadow: -5px 5px 0 1px var(--light-blue); */
+}
+.card.epic,
+.card.epic::before,
+.card.epic::after {
+  background-color: var(--purple);
+  /* box-shadow: -5px 5px 0 1px var(--purple); */
+}
+.card.legend,
+.card.legend::before,
+.card.legend::after {
+  background-image: linear-gradient(-45deg, var(--rainbow));
+  /* box-shadow: -5px 5px 0 1px var(--rainbow); */
+}
