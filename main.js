@@ -20,11 +20,17 @@ const $msg = document.querySelector(".msg");
 const $reqBtn = document.querySelector(".req-chest-btn");
 const $slotss = document.querySelectorAll(".slot");
 const $notifications = document.querySelector(".notification-container");
-const $COLLECTION = document.querySelector(".collection");
+const $chestSlots = document.querySelector(".chest-slots");
 const $TIMER = document.querySelector(".timer");
 const $progressBar = document.querySelector(".timer-progress");
 const $overlay = document.querySelector(".overlay");
 const $toggleAboutBtn = document.querySelector(".toggle-about-btn");
+const $resetBtn = document.querySelector(".reset-btn");
+
+const common = document.querySelector("span.common");
+const rare = document.querySelector("span.rare");
+const epic = document.querySelector("span.epic");
+const legendary = document.querySelector("span.legendary");
 
 $toggleAboutBtn.addEventListener("click", () => {
   $overlay.classList.add("showAbout");
@@ -47,10 +53,10 @@ let myCollection = {
 };
 
 const loadCardsToCollection = (collection) => {
-  const common = document.querySelector("span.common");
-  const rare = document.querySelector("span.rare");
-  const epic = document.querySelector("span.epic");
-  const legendary = document.querySelector("span.legendary");
+  // const common = document.querySelector("span.common");
+  // const rare = document.querySelector("span.rare");
+  // const epic = document.querySelector("span.epic");
+  // const legendary = document.querySelector("span.legendary");
 
   common.textContent = collection.common;
   rare.textContent = collection.rare;
@@ -59,10 +65,10 @@ const loadCardsToCollection = (collection) => {
 };
 
 const insertCardsToCollection = (collection) => {
-  const common = document.querySelector("span.common");
-  const rare = document.querySelector("span.rare");
-  const epic = document.querySelector("span.epic");
-  const legendary = document.querySelector("span.legendary");
+  // const common = document.querySelector("span.common");
+  // const rare = document.querySelector("span.rare");
+  // const epic = document.querySelector("span.epic");
+  // const legendary = document.querySelector("span.legendary");
   collection.forEach(({ type, amount }) => {
     myCollection[type] += amount;
   });
@@ -401,6 +407,46 @@ $slotss.forEach((slot) => {
         pushEvent,
         popEvent
       );
+    }
+  });
+});
+
+$resetBtn.addEventListener("click", () => {
+  //clear localStorage
+  chestHolders = {
+    1: {
+      isEmpty: true,
+    },
+    2: {
+      isEmpty: true,
+    },
+    3: {
+      isEmpty: true,
+    },
+    4: {
+      isEmpty: true,
+    },
+  };
+  myCollection = {
+    common: 0,
+    rare: 0,
+    epic: 0,
+    legendary: 0,
+  };
+  localStorage.setItem("MYSLOTS", JSON.stringify(chestHolders));
+  localStorage.setItem("MYCARDS", JSON.stringify(myCollection));
+  //remove from dom
+  common.textContent = myCollection.common;
+  rare.textContent = myCollection.rare;
+  epic.textContent = myCollection.epic;
+  legendary.textContent = myCollection.legendary;
+
+  const children = [...$chestSlots.children];
+
+  slots = Object.values(chestHolders);
+  children.forEach((child) => {
+    while (child.children.length) {
+      child.removeChild(child.firstChild);
     }
   });
 });
